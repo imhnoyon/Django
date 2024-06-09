@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+ 
+<div style="width: 50%;height: 50px; margin: auto;margin-top: 50px;">
+    <h3>Movie rating form</h3>
+    <form method="post" action="about/">
+        {% csrf_token %}
+         <div class="mb-3">
+         
+           <label for="exampleInputName" class="form-label">Name</label>
+           <input type="text" class="form-control" id="exampleInputName" aria-describedby="emailHelp" name='userName'>
+           <label for="exampleInputEmail1" class="form-label">Email address</label>
+           <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name='userEmail'>
+         
+           <select class="form-select" aria-label="Default select example" name='select'>
+            <option selected>Movie Ratings</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+         </div>
+
+         
+
+         <button type="submit" class="btn btn-primary">Submit</button>
+       </form>
+        
+</div>
+
+  
+
+{% endblock %}
