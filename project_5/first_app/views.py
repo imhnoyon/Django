@@ -19,19 +19,44 @@ def about(request):
 
 def django_form(request):
     if request.method=="POST":
-        form=forms.contactForm(request.POST,request.FILES)
+        form=forms.contactForm()  # contact form er parameter (request.POST,request.FILES)
         if form.is_valid():
-            file=form.cleaned_data['file']
-            with open("./first_app/upload/" + file.name, 'wb+') as destination:
-                for chunk in file.chunks():
-                    destination.write(chunk)
+            # file=form.cleaned_data['file']
+            # with open("./first_app/upload/" + file.name, 'wb+') as destination:
+            #     for chunk in file.chunks():
+            #         destination.write(chunk)
             print(form.cleaned_data)
-            return render(request,'django_form.html',{'form':form})
+            # return render(request,'django_form.html',{'form':form})
     else:
         form=forms.contactForm()
     return render(request,'django_form.html',{'form':form})
 
 
+def student(request):
+     if request.method=="POST":
+        form=forms.studentForm(request.POST,request.FILES) 
+        if form.is_valid():
+            print(form.cleaned_data)
+    
+     else:
+        form=forms.studentForm()
+     return render(request,'student_form.html',{'form':form})
+
+
+def passwordvalid(request):
+     if request.method=="POST":
+        form=forms.passwordValidation(request.POST) 
+        if form.is_valid():
+            print(form.cleaned_data)
+    
+     else:
+        form=forms.passwordValidation()
+     return render(request,'password.html',{'form':form})
+
+
+
+                       
+   
 
 
 
