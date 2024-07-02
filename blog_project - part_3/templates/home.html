@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="d-flex flex-wrap align-items-center">
+
+  <div class='col-6 p-3'>
+    <h2>Welcome to Django Blog</h2>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam repellendus nostrum ea assumenda esse excepturi dolor repellat tenetur quo, beatae dolores soluta in laudantium dolore veniam pariatur deserunt adipisci dolorem explicabo laborum consequuntur eos ipsam sunt. Provident, perferendis rerum soluta, architecto velit in laborum esse laboriosam impedit iusto debitis iure aliquam! Ratione aspernatur officiis corporis! Et provident harum ipsa sequi maxime recusandae, amet maiores dignissimos nisi facere doloribus aliquam nam, aperiam placeat ea ut quod deleniti asperiores magni ullam dolores officiis animi? Quibusdam deserunt, perspiciatis reprehenderit sed officia blanditiis dicta error eum voluptate! A animi quae officia possimus rerum necessitatibus.</p>
+  </div>
+
+  <div class="col-6">
+    <img style="width: 100%; padding-right: 20px;" src="{% static 'banner.jpg' %}" alt="">
+    <div>
+      
+    </div>
+  </div>
+
+
+</div>
+
+<div class='d-flex flex-wrap m-3'>
+<div class='col-2 bg-white p-3'>
+  <h5 style='text-align:center '>All Categories</h5>
+  {% for d in data %}
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" value="{{d.Category_name}}" id="{{d.id}}" >
+    <label class="form-check-label" for="{{d.id}}">
+      
+      <a class='text-decoration-none text-dark' href="{% url "category_post" d.slug %}">{{d.Category_name}}</a>
+    </label>
+  </div>
+  {% endfor %}
+  
+
+</div>
+<div class='col-10 p-3 '>
+  <p style='text-align:center'>{{form | length}} Results Founds</p>
+  <div class="d-flex flex-wrap  px-5 pt-5">
+    
+    {% for post in form %}
+      
+    <div class="col-sm-3 mb-3 mb-sm-0 p-1">
+       <div class="card mx-2">
+         <div class="card-body">
+          <img src="{{post.image.url}}" class="card-img-top">
+           <h5 class="card-title"><a href="{% url "details_post" post.id %}" class="text-decoration-none text-dark">{{post.title}}</a></h5>
+           <p class="card-text">{{post.content | truncatewords:10}}</p>
+           <p>Author: {{post.author.first_name}} {{post.author.last_name}}</p>
+           <p>
+           {% for cat in post.category.all %}
+           <button class="btn btn-primary btn-sm m-2">{{cat.Category_name}}</button>
+           {% endfor %}
+           </p>
+         </div>
+       </div>
+     </div> 
+    
+    {% endfor %}
+
+   
+ </div>
+
+</div>
+
+</div>
+{% endblock %}

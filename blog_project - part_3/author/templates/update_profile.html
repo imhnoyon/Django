@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+ 
+
+ <form  style="width: 40%;margin: auto;" method="post">
+    <h3>{{type}} Form</h3>
+    <a class='btn btn-warning btn-sm' href="{% url "pass_change" %}">Change Password</a>
+    <br>
+    {% csrf_token %}
+    <!-- {{form | crispy }} -->
+    {% for fm in form %} 
+
+    {{fm.label_tag}} 
+    {{fm}} 
+    {{fm.errors|striptags}} 
+
+    {% endfor %}
+    <button class="btn btn-warning mt-3">Submit</button>
+</form>
+
+{% endblock %}
